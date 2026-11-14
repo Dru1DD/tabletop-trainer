@@ -1321,6 +1321,7 @@ const catalog: Catalog = {
   "Monstrous Bonesword and Lash Whip": "Кістяний меч і батіг (Monstrous Bonesword and Lash Whip)",
   "Monstrous Scything Talons": "Кігті-серпи (Monstrous Scything Talons)",
   "More options that do not repay the CP ({length})": "Ще варіанти, які не окуповують CP ({length})",
+  "More useful options ({length})": "Ще вигідні варіанти ({length})",
   "More: {label}": "Більше: {label}",
   "Most dangerous to": "Найнебезпечніший для",
   "Most dangerous to it": "Найнебезпечніше для нього",
