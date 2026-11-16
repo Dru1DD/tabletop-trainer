@@ -3,7 +3,7 @@ import { useDeferredValue, useEffect, useLayoutEffect, useMemo, useRef, useState
 import { Circle, Ellipse, Group, Image as KImage, Layer, Line, Rect, Shape, Stage, Text } from 'react-konva'
 import { BOARD_STYLE, FACTION_LINE, FACTION_STYLE, TERRAIN_STYLE, TOKENS, tokenImageFor } from '../assets/manifest'
 import { artFor, useUnitArt } from '../assets/unitArt'
-import { boxOf, fitBox, withBox, type Box } from '../game/terrainLayout'
+import { boxOf, fitBox, treeSpots, withBox, type Box } from '../game/terrainLayout'
 import { actor, moveAllowance, moveCommand, moveModeFor, shootPlan, validate } from '../game/engine'
 import { baseRadius, dist, edgeDistance, withinRange } from '../game/geometry/geometry'
 import { alive, CHARGE_RANGE, findUnit, fmt, hasAbility, isFlyer, leadingAbility, modelDatasheetId, modelDistance, OBJECTIVE_MARKER_MM, OBJECTIVE_RANGE, profileOf, radiusOf, sidesOf, weaponsOf } from '../game/gameState'
@@ -350,17 +350,12 @@ function TerrainShape({ t, editable, selected, onClick, onMove }: { t: Terrain; 
       ) : t.kind === 'woods' ? (
         <>
           <Rect width={b.w} height={b.h} stroke={ink} strokeWidth={0.05} dash={[0.25, 0.12]} cornerRadius={0.4} listening={false} />
-          {Array.from({ length: Math.max(1, Math.floor(b.w / 1.2)) * Math.max(1, Math.floor(b.h / 1.2)) }, (_, i) => {
-            const cols = Math.max(1, Math.floor(b.w / 1.2))
-            const x = ((i % cols) + 0.5) * (b.w / cols) + (Math.floor(i / cols) % 2 ? 0.25 : -0.25)
-            const y = (Math.floor(i / cols) + 0.5) * (b.h / Math.max(1, Math.floor(b.h / 1.2)))
-            return (
-              <Group key={i} x={x} y={y} listening={false}>
-                <Circle radius={0.45} stroke={ink} strokeWidth={0.04} fill={ink} opacity={0.5} />
-                <Circle radius={0.08} fill={ink} />
-              </Group>
-            )
-          })}
+          {treeSpots(b).map(({ x, y }, i) => (
+            <Group key={i} x={x} y={y} listening={false}>
+              <Circle radius={0.45} stroke={ink} strokeWidth={0.04} fill={ink} opacity={0.5} />
+              <Circle radius={0.08} fill={ink} />
+            </Group>
+          ))}
         </>
       ) : t.kind === 'barricade' ? (
         <>

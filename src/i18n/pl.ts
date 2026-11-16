@@ -107,8 +107,8 @@ const catalog: Catalog = {
   "; modifier {wmod} ({woundModNote})": "; modyfikator {wmod} ({woundModNote})",
   "===== Round 1 ===== {item} goes first.": "===== Runda 1 ===== Pierwszy ruch: {item}.",
   "===== Round {round} =====": "===== Runda {round} =====",
-  "A 30″×22″ field (like the Introductory Set mat). The Space Marines deploy at the left edge, the Orks at the right. Three objective markers, hut-ruins block line of sight, craters give cover. The open field favours shooters.": "Pole 30″×22″ (jak mata z Introductory Set). Space Marines rozstawiają się przy lewej krawędzi, Orkowie przy prawej. Trzy znaczniki celów, chaty-ruiny blokują widoczność, kratery dają osłonę. Otwarte pole sprzyja strzelcom.",
-  "A 44″×30″ field and bigger armies; all six armies (Space Marines, Orks, Tyranids, Necrons, Aeldari, Adeptus Mechanicus) are available in any pair — see the army selection screen for the roster. Varied terrain: ruins and woods (vehicles cannot pass), containers (you cannot stand inside), barricades, craters. A longer and tactically richer game.": "Pole 44″×30″ i większe armie; dostępne są wszystkie sześć armii (Space Marines, Orkowie, Tyranidzi, Necroni, Aeldari, Adeptus Mechanicus) w dowolnych parach — skład zobaczysz na ekranie wyboru armii. Zróżnicowany teren: ruiny i las (pojazdy nie przejadą), kontenery (w środku nie można stać), barykady, kratery. Dłuższa i taktycznie bogatsza gra.",
+  "A 30″×22″ field (like the Introductory Set mat). The Space Marines deploy at the left edge, the Orks at the right. Three objective markers, hut-ruins block line of sight. The open field favours shooters.": "Pole 30″×22″ (jak mata z Introductory Set). Space Marines rozstawiają się przy lewej krawędzi, Orkowie przy prawej. Trzy znaczniki celów, chaty-ruiny blokują widoczność. Otwarte pole sprzyja strzelcom.",
+  "A 44″×30″ field and bigger armies; all six armies (Space Marines, Orks, Tyranids, Necrons, Aeldari, Adeptus Mechanicus) are available in any pair — see the army selection screen for the roster. Varied terrain: ruins and woods (vehicles cannot pass), containers (you cannot stand inside), barricades. A longer and tactically richer game.": "Pole 44″×30″ i większe armie; dostępne są wszystkie sześć armii (Space Marines, Orkowie, Tyranidzi, Necroni, Aeldari, Adeptus Mechanicus) w dowolnych parach — skład zobaczysz na ekranie wyboru armii. Zróżnicowany teren: ruiny i las (pojazdy nie przejadą), kontenery (w środku nie można stać), barykady. Dłuższa i taktycznie bogatsza gra.",
   "A Combat Doctrine is chosen in the Command phase.": "Doktrynę bojową wybiera się w fazie dowodzenia.",
   "A Grievous Blow": "Ciężki cios",
   "A Heavy weapon works best with a unit that did not move. Decide in advance: move or shoot from where you stand.": "Broń Heavy działa najlepiej w oddziale, który się nie poruszał. Zdecyduj wcześniej: poruszać się czy strzelać z miejsca.",
@@ -614,7 +614,6 @@ const catalog: Catalog = {
   "Cover makes a target noticeably tougher. With targets of similar value pick the one standing in the open.": "Osłona sprawia, że cel jest wyraźnie wytrzymalszy. Przy podobnej wartości celów wybieraj ten, który stoi na otwartym terenie.",
   "Covered:": "Pokonano:",
   "Cpt": "Cpt",
-  "Crater": "Krater",
   "Crater: cover for infantry": "Krater: osłona dla piechoty",
   "Create a room": "Utwórz pokój",
   "Crewed Platform: when the last Guardian Defender dies, the remaining heavy weapon platforms are destroyed.": "Załoga platformy (Crewed Platform): gdy ginie ostatni Strażnik-obrońca, pozostałe platformy ciężkiej broni zostają zniszczone.",
@@ -3439,6 +3438,8 @@ const catalog: Catalog = {
   "🧬 Hyper-adaptation for the whole battle": "🧬 Hiperadaptacja na całą bitwę",
   "🧭 Turn plan": "🧭 Plan tury",
   "🧭 Turn plan (the opponent is moving now)": "🧭 Plan tury (teraz rusza się przeciwnik)",
+  "Optional: skip it to use the standard rosters.": "Opcjonalnie: pomiń, aby użyć standardowych składów.",
+  "Ready to start": "Gotowe do startu",
 }
 
 export default catalog

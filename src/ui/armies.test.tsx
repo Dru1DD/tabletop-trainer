@@ -16,11 +16,18 @@ const reset = () => {
   useStore.getState().setSettings({ human: 'marines', opponent: 'orks', scenarioId: 'training-outpost', armies: {} })
 }
 
+/** The main menu is a wizard: "New battle" opens step 1, the step pills jump anywhere. */
+const toStep = (n: number) => {
+  if (!screen.queryByRole('list', { name: 'Новая битва' })) fireEvent.click(screen.getByText('Новая битва'))
+  fireEvent.click(screen.getByRole('button', { name: new RegExp(`^${n}\\.`) }))
+}
+
 describe('faction selection screen', () => {
   beforeEach(reset)
 
   it('shows the real composition of every army, not just its name', () => {
     render(<App />)
+    toStep(1)
     const list = (name: string) => within(screen.getByLabelText(`Состав: ${name}`))
     expect(list('Космодесант').getByText(/Интерсессоры/)).toBeInTheDocument() // the selected small scenario
     const ty = list('Тираниды')
@@ -40,6 +47,7 @@ describe('faction selection screen', () => {
   it('shows unit and army points and warns about a lopsided pairing', () => {
     useStore.getState().setSettings({ human: 'adeptus_mechanicus', opponent: 'orks', scenarioId: 'combat-patrol' })
     render(<App />)
+    toStep(1)
     const am = within(screen.getByLabelText('Состав: Адептус Механикус'))
     expect(am.getByText(/Стоимость армии: ≈ 865 очк\./)).toBeInTheDocument()
     expect(am.getAllByText(/· 150 очк\./).length).toBeGreaterThan(0) // Skitarii Rangers (85) led by the Tech-Priest Dominus (65)
@@ -51,21 +59,25 @@ describe('faction selection screen', () => {
 
   it('Adeptus Mechanicus can be picked as the player army and as the opponent', () => {
     render(<App />)
+    toStep(1)
     fireEvent.click(screen.getByText('Адептус Механикус'))
     expect(useStore.getState().settings).toMatchObject({ human: 'adeptus_mechanicus', scenarioId: 'combat-patrol' })
     fireEvent.click(screen.getByText('Космодесант'))
     fireEvent.change(screen.getByLabelText(/Противник/), { target: { value: 'adeptus_mechanicus' } })
     expect(useStore.getState().settings).toMatchObject({ human: 'marines', opponent: 'adeptus_mechanicus' })
+    toStep(4)
     fireEvent.click(screen.getByText('Начать новую битву'))
     expect(sidesOf(useStore.getState().game!)).toEqual(['marines', 'adeptus_mechanicus'])
   })
 
   it('picking a new army moves to a board that has it and starts a battle against any opponent', () => {
     render(<App />)
+    toStep(1)
     fireEvent.click(screen.getByText('Некроны'))
     expect(useStore.getState().settings).toMatchObject({ human: 'necrons', scenarioId: 'combat-patrol' })
     fireEvent.change(screen.getByLabelText(/Противник/), { target: { value: 'aeldari' } })
     expect(useStore.getState().settings.opponent).toBe('aeldari')
+    toStep(4)
     fireEvent.click(screen.getByText('Начать новую битву'))
     const g = useStore.getState().game!
     expect(useStore.getState().deploying).not.toBeNull()
@@ -75,6 +87,7 @@ describe('faction selection screen', () => {
 
   it('the opponent can never be the same army as the player', () => {
     render(<App />)
+    toStep(1)
     fireEvent.click(screen.getByText('Орки')) // opponent was Orks
     expect(useStore.getState().settings.human).toBe('orks')
     expect(useStore.getState().settings.opponent).not.toBe('orks')
@@ -178,7 +191,8 @@ describe('army builder on the start screen', () => {
 
   it('a preset switches to the Combat Patrol board, edits update the points, going over the limit blocks the start', () => {
     render(<App />)
-    const mine = within(screen.getByLabelText('Состав армии: Космодесант'))
+    toStep(3)
+    let mine = within(screen.getByLabelText('Состав армии: Космодесант'))
     fireEvent.click(mine.getByText('Пресет 500'))
     expect(useStore.getState().settings).toMatchObject({ scenarioId: 'combat-patrol', armies: { marines: { limit: 500 } } })
     expect(mine.getByLabelText('Очки армии')).toHaveTextContent('480 / 500')
@@ -186,16 +200,24 @@ describe('army builder on the start screen', () => {
     const theirs = within(screen.getByLabelText('Состав армии: Орки'))
     fireEvent.click(theirs.getByText('Пресет 500'))
     expect(theirs.getByLabelText('Очки армии')).toHaveTextContent('495 / 500')
+    toStep(1)
     expect(screen.getByLabelText('Баланс армий по очкам')).toHaveTextContent(/480 очк\..*495 очк\./)
+    toStep(3)
+    mine = within(screen.getByLabelText('Состав армии: Космодесант'))
     // a bigger unit goes over the limit
     fireEvent.change(mine.getByLabelText('Размер отряда «Отделение интерсессоров»'), { target: { value: '10' } })
     expect(mine.getByLabelText('Очки армии')).toHaveTextContent('550 / 500')
     expect(mine.getByText('Свой список')).toBeInTheDocument()
-    expect(screen.getByText('Начать новую битву')).toBeDisabled()
     expect(mine.getByLabelText('Ошибки состава')).toHaveTextContent('Перебор очков: 550 из 500.')
+    toStep(4)
+    expect(screen.getByText('Начать новую битву')).toBeDisabled()
     // raising the limit makes it playable again; the battle uses the list
-    fireEvent.change(mine.getByDisplayValue('500 очков'), { target: { value: '1000' } })
+    toStep(3)
+    fireEvent.change(within(screen.getByLabelText('Состав армии: Космодесант')).getByDisplayValue('500 очков'), { target: { value: '1000' } })
+    toStep(4)
     expect(screen.getByText('Начать новую битву')).toBeEnabled()
+    toStep(1)
+    fireEvent.click(screen.getByText('Главное меню'))
     fireEvent.click(screen.getByText('Быстрый старт'))
     const g = useStore.getState().game!
     expect(g.scenarioId).toBe('combat-patrol')
@@ -207,40 +229,50 @@ describe('army builder on the start screen', () => {
 
   it('a preset over 1000 points moves the battle to the 44″×60″ board and says why', () => {
     render(<App />)
+    toStep(3)
     const mine = within(screen.getByLabelText('Состав армии: Космодесант'))
     fireEvent.click(mine.getByText('Пресет 2000'))
     expect(useStore.getState().settings).toMatchObject({ scenarioId: 'strike-force', armies: { marines: { limit: 2000 } } })
     expect(mine.getByLabelText('Очки армии')).toHaveTextContent('1985 / 2000')
     expect(mine.getByText(/Больше 1000 очков: битва идёт на поле 44″×60″/)).toBeInTheDocument()
+    toStep(2)
     expect(screen.getByRole('option', { name: /составам больше 1000 очков нужно поле побольше/ })).toBeDisabled()
     // back to 1000 points: Combat Patrol takes the list again
-    fireEvent.change(mine.getByDisplayValue('2000 очков'), { target: { value: '1000' } })
+    toStep(3)
+    fireEvent.change(within(screen.getByLabelText('Состав армии: Космодесант')).getByDisplayValue('2000 очков'), { target: { value: '1000' } })
     expect(screen.queryByText(/Больше 1000 очков/)).not.toBeInTheDocument()
+    toStep(2)
     expect(screen.queryByRole('option', { name: /нужно поле побольше/ })).not.toBeInTheDocument()
   })
 
   it('a preset over 1000 points moves the battle to the 44″×60″ board and says why', () => {
     render(<App />)
+    toStep(3)
     const mine = within(screen.getByLabelText('Состав армии: Космодесант'))
     fireEvent.click(mine.getByText('Пресет 2000'))
     expect(useStore.getState().settings).toMatchObject({ scenarioId: 'strike-force', armies: { marines: { limit: 2000 } } })
     expect(mine.getByLabelText('Очки армии')).toHaveTextContent('1985 / 2000')
     expect(mine.getByText(/Больше 1000 очков: битва идёт на поле 44″×60″/)).toBeInTheDocument()
+    toStep(2)
     expect(screen.getByRole('option', { name: /составам больше 1000 очков нужно поле побольше/ })).toBeDisabled()
     // back to 1000 points: Combat Patrol takes the list again
-    fireEvent.change(mine.getByDisplayValue('2000 очков'), { target: { value: '1000' } })
+    toStep(3)
+    fireEvent.change(within(screen.getByLabelText('Состав армии: Космодесант')).getByDisplayValue('2000 очков'), { target: { value: '1000' } })
     expect(screen.queryByText(/Больше 1000 очков/)).not.toBeInTheDocument()
+    toStep(2)
     expect(screen.queryByRole('option', { name: /нужно поле побольше/ })).not.toBeInTheDocument()
   })
 
   it('removing units and going back to the training roster', () => {
     render(<App />)
+    toStep(3)
     const mine = within(screen.getByLabelText('Состав армии: Космодесант'))
     fireEvent.click(mine.getByText('Пресет 500'))
     fireEvent.click(mine.getByLabelText('Убрать «Ветераны Bladeguard»'))
     expect(mine.getByLabelText('Очки армии')).toHaveTextContent('400 / 500')
     fireEvent.click(mine.getByText('Учебный состав'))
     expect(useStore.getState().settings.armies).toEqual({})
+    toStep(1)
     expect(within(screen.getByLabelText('Состав: Космодесант')).getByText(/Стоимость армии: 475 очк\./)).toBeInTheDocument() // the Combat Patrol training roster (the board stays)
   })
 })

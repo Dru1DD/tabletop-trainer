@@ -46,7 +46,7 @@ The board tells you what to do next. The banner at the top shows the next step, 
 
 
 1. On the start screen, choose a faction, scenario, AI level (Beginner / Standard) and a learning style: Step by step (lessons), With hints (contextual help) or On your own (minimal text). Lesson progress is kept in this browser.
-2. **Deployment:** “Start a new battle” first opens the setup step. Optionally rearrange the battlefield in “0. Battlefield”: add ruins, walls or craters, drag them, change their size, rotate or delete them. The layout is remembered per scenario in this browser; “Restore the terrain as in the scenario” restores the original. Drag your units inside the highlighted zone at your table edge and press “✓ Place” for each one, then “Start the battle ▶”. The right panel shows your army, the placement rules, progress and anything still blocking the start. “Quick start” skips this step.
+2. **Deployment:** “Start a new battle” first opens the setup step. Optionally rearrange the battlefield in “0. Battlefield”: add ruins, walls or woods, drag them, change their size, rotate or delete them. The layout is remembered per scenario in this browser; “Restore the terrain as in the scenario” restores the original. Drag your units inside the highlighted zone at your table edge and press “✓ Place” for each one, then “Start the battle ▶”. The right panel shows your army, the placement rules, progress and anything still blocking the start. “Quick start” skips this step.
 3. **Movement:** select your unit and drag a model.
    - By default the whole unit moves together; turn off “Move the whole unit” to place models one at a time.
    - The dashed circle shows how far the model can go. Red highlighting plus a reason means the position is illegal.

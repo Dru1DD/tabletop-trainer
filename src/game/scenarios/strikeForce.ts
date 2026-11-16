@@ -73,7 +73,6 @@ type Kind = Terrain['kind']
 const piece = (kind: Kind, name: string, obscuring: boolean) => (id: string, poly: Vec[]): Terrain => ({ id, name, kind, poly, obscuring })
 const ruin = piece('ruin', tr('Ruins'), true)
 const woods = piece('woods', tr('Woods'), true)
-const crater = piece('crater', tr('Crater'), false)
 const container = piece('container', tr('Container'), true)
 const barricade = piece('barricade', tr('Barricade'), true)
 
@@ -92,13 +91,13 @@ const LAYOUTS: Record<LayoutId, { name: string; pieces: Terrain[] }> = {
     name: tr('Manufactorum ruins'),
     pieces: pairs([
       [ruin, 13, 5, 6, 5], [ruin, 21, 28, 5, 6], [woods, 17, 15, 5, 5], [container, 27, 9, 4, 1.5],
-      [crater, 46, 13, 3, 3], [barricade, 24, 19.5, 0.6, 4], [ruin, 35, 36, 5, 4],
+      [barricade, 24, 19.5, 0.6, 4], [ruin, 35, 36, 5, 4],
     ], [ruin('c0', rect(28, 20.5, 4, 3))]),
   },
   B: {
     name: tr('Wooded hills'),
     pieces: pairs([
-      [woods, 14, 8, 6, 6], [woods, 22, 30, 6, 5], [crater, 25, 14, 3, 3], [crater, 16, 24, 3, 3],
+      [woods, 14, 8, 6, 6], [woods, 22, 30, 6, 5],
       [ruin, 36, 4, 5, 4], [barricade, 33, 18, 4, 0.6], [container, 44, 30, 1.5, 4],
     ], [woods('c0', rect(27.5, 19.5, 5, 5))]),
   },
@@ -106,7 +105,7 @@ const LAYOUTS: Record<LayoutId, { name: string; pieces: Terrain[] }> = {
     name: tr('City ruins'),
     pieces: pairs([
       [ruin, 13, 4, 5, 6], [ruin, 13, 18, 4, 6], [ruin, 20, 30, 6, 4], [ruin, 23, 9, 5, 4],
-      [container, 33, 14, 1.5, 4], [barricade, 20, 25.5, 4, 0.6], [crater, 40, 3, 3, 3],
+      [container, 33, 14, 1.5, 4], [barricade, 20, 25.5, 4, 0.6],
     ], [ruin('c0', rect(26, 21, 3, 2)), ruin('c1', rect(31, 21, 3, 2))]),
   },
 }
@@ -139,10 +138,10 @@ function patrolPairs(list: [ReturnType<typeof piece>, number, number, number, nu
 export const PATROL_LAYOUT_NAME: Record<LayoutId, string> = { A: tr('Classic (as before)'), B: tr('Forest edge'), C: tr('Ruined streets') }
 const PATROL_LAYOUTS: Record<'B' | 'C', Terrain[]> = {
   B: patrolPairs([
-    [woods, 13, 3, 4, 4], [woods, 18, 18, 4, 4], [crater, 19, 11.5, 2.5, 2.5], [barricade, 16, 12.5, 0.6, 4], [ruin, 24, 2, 4, 3],
+    [woods, 13, 3, 4, 4], [woods, 18, 18, 4, 4], [barricade, 16, 12.5, 0.6, 4], [ruin, 24, 2, 4, 3],
   ]),
   C: patrolPairs([
-    [ruin, 13, 2, 4, 5], [ruin, 18, 9.5, 3, 3], [container, 25, 6.5, 1.5, 4], [barricade, 12, 20, 4, 0.6], [crater, 28, 13, 2.5, 2.5],
+    [ruin, 13, 2, 4, 5], [ruin, 18, 9.5, 3, 3], [container, 25, 6.5, 1.5, 4], [barricade, 12, 20, 4, 0.6],
   ], [ruin('c0', rect(20.5, 13.5, 3, 3))]),
 }
 

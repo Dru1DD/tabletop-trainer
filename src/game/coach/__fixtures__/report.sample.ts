@@ -142,7 +142,7 @@ const fightTarget = m('fight.targetChoice', {
 })
 const noCover = m('move.noCover', {
   severity: 'minor', confidence: 'estimate', round: 3, phase: 'movement', unitIds: ['int2'], frameIndex: 28, impact: 1.3,
-  metrics: { chosenExpectedWounds: 3.4, bestExpectedWounds: 2.1, deltaWounds: 1.3, distanceInches: 3.5 }, refs: { terrainId: 't9' },
+  metrics: { chosenExpectedWounds: 3.4, bestExpectedWounds: 2.1, deltaWounds: 1.3, distanceInches: 3.5 }, refs: { terrainId: 't5' },
 })
 const chargeExposure = m('move.chargeExposure', {
   severity: 'minor', confidence: 'estimate', round: 3, phase: 'movement', unitIds: ['lt'], frameIndex: 29, impact: 2.8,
@@ -201,7 +201,7 @@ const objectiveHeld = m('good.objectiveHeld', {
 })
 const goodCover = m('good.cover', {
   severity: 'info', confidence: 'estimate', round: 2, phase: 'movement', unitIds: ['lt'], frameIndex: 11, impact: 1.2,
-  metrics: { chosenExpectedWounds: 1.8, alternativeExpectedWounds: 3, deltaWounds: 1.2 }, refs: { terrainId: 't9' },
+  metrics: { chosenExpectedWounds: 1.8, alternativeExpectedWounds: 3, deltaWounds: 1.2 }, refs: { terrainId: 't5' },
 })
 const goodEfficiency = m('good.efficiency', {
   severity: 'info', confidence: 'exact', round: 4, phase: 'shooting', unitIds: ['int'], frameIndex: 57, impact: 1.1,

@@ -15,7 +15,9 @@ describe('UI', () => {
   it('starts a game in Russian with both factions selectable', () => {
     render(<App />)
     expect(screen.getByText('Тренировочный стол')).toBeInTheDocument()
+    fireEvent.click(screen.getByText('Новая битва'))
     fireEvent.click(screen.getByText('Орки'))
+    fireEvent.click(screen.getByRole('button', { name: /^4\./ }))
     fireEvent.click(screen.getByText('Начать новую битву'))
     expect(useStore.getState().settings.human).toBe('orks')
     expect(screen.getByTestId('board')).toBeInTheDocument()

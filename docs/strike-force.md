@@ -30,7 +30,7 @@ Each player's half of the board is its territory (`GameState.territory`). The zo
 Three layouts, drawn on the 60″×44″ board and transposed for the 44″×60″ maps, each point-symmetric:
 
 - **A — «Manufactorum ruins»**: ruins, woods and a container around a ruined centre.
-- **B — «Wooded hills»**: woods and craters, a wooded centre.
+- **B — «Wooded hills»**: woods, a wooded centre.
 - **C — «City ruins»**: dense ruins.
 
 No objective sits in a container or a barricade. The terrain editor's saved layout is not used on this board, because the board changes with the map.

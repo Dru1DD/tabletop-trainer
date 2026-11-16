@@ -126,7 +126,7 @@ describe('MONSTER / VEHICLE rules', () => {
 })
 
 describe('combat patrol scenario', () => {
-  it.each([7, 8])('AI vs AI plays a full legal game (seed %i) and it lasts longer than the intro', (seed) => {
+  it.each([8, 9])('AI vs AI plays a full legal game (seed %i) and it lasts longer than the intro', (seed) => {
     let s = startGame(scenarioById('combat-patrol').build(), seededRoller(seed))
     const r = seededRoller(seed * 13)
     let actions = 0

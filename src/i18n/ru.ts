@@ -107,8 +107,8 @@ const catalog: Catalog = {
   "; modifier {wmod} ({woundModNote})": "; модификатор {wmod} ({woundModNote})",
   "===== Round 1 ===== {item} goes first.": "===== Раунд 1 ===== Первым ходит: {item}.",
   "===== Round {round} =====": "===== Раунд {round} =====",
-  "A 30″×22″ field (like the Introductory Set mat). The Space Marines deploy at the left edge, the Orks at the right. Three objective markers, hut-ruins block line of sight, craters give cover. The open field favours shooters.": "Поле 30″×22″ (как коврик Introductory Set). Космодесант развёртывается у левого края, Орки — у правого. Три маркера целей, хижины-руины блокируют обзор, воронки дают укрытие. Открытое поле — преимущество у стрелков.",
-  "A 44″×30″ field and bigger armies; all six armies (Space Marines, Orks, Tyranids, Necrons, Aeldari, Adeptus Mechanicus) are available in any pair — see the army selection screen for the roster. Varied terrain: ruins and woods (vehicles cannot pass), containers (you cannot stand inside), barricades, craters. A longer and tactically richer game.": "Поле 44″×30″ и армии крупнее; здесь доступны все шесть армий (Космодесант, Орки, Тираниды, Некроны, Аэльдари, Адептус Механикус) в любых парах — состав смотрите на экране выбора армии. Разнообразный тиррейн: руины и лес (техника не проходит), контейнеры (внутри нельзя стоять), баррикады, воронки. Игра длиннее и тактически богаче.",
+  "A 30″×22″ field (like the Introductory Set mat). The Space Marines deploy at the left edge, the Orks at the right. Three objective markers, hut-ruins block line of sight. The open field favours shooters.": "Поле 30″×22″ (как коврик Introductory Set). Космодесант развёртывается у левого края, Орки — у правого. Три маркера целей, хижины-руины блокируют обзор. Открытое поле — преимущество у стрелков.",
+  "A 44″×30″ field and bigger armies; all six armies (Space Marines, Orks, Tyranids, Necrons, Aeldari, Adeptus Mechanicus) are available in any pair — see the army selection screen for the roster. Varied terrain: ruins and woods (vehicles cannot pass), containers (you cannot stand inside), barricades. A longer and tactically richer game.": "Поле 44″×30″ и армии крупнее; здесь доступны все шесть армий (Космодесант, Орки, Тираниды, Некроны, Аэльдари, Адептус Механикус) в любых парах — состав смотрите на экране выбора армии. Разнообразный тиррейн: руины и лес (техника не проходит), контейнеры (внутри нельзя стоять), баррикады. Игра длиннее и тактически богаче.",
   "A Combat Doctrine is chosen in the Command phase.": "Боевая доктрина выбирается в фазе командования.",
   "A Grievous Blow": "Тяжкий удар",
   "A Heavy weapon works best with a unit that did not move. Decide in advance: move or shoot from where you stand.": "Оружие Heavy лучше всего работает у отряда, который не двигался. Решайте заранее: двигаться или стрелять с места.",
@@ -614,7 +614,6 @@ const catalog: Catalog = {
   "Cover makes a target noticeably tougher. With targets of similar value pick the one standing in the open.": "Укрытие делает цель заметно крепче. При сопоставимой ценности целей выбирайте ту, что стоит на открытом месте.",
   "Covered:": "Пройдено:",
   "Cpt": "Кп",
-  "Crater": "Воронка",
   "Crater: cover for infantry": "Воронка: укрытие для пехоты",
   "Create a room": "Создать комнату",
   "Crewed Platform: when the last Guardian Defender dies, the remaining heavy weapon platforms are destroyed.": "Экипаж платформы (Crewed Platform): когда погибает последний Страж-защитник, оставшиеся платформы тяжёлого оружия уничтожаются.",
@@ -3439,6 +3438,8 @@ const catalog: Catalog = {
   "🧬 Hyper-adaptation for the whole battle": "🧬 Гиперадаптация на всю битву",
   "🧭 Turn plan": "🧭 План хода",
   "🧭 Turn plan (the opponent is moving now)": "🧭 План хода (сейчас ходит противник)",
+  "Optional: skip it to use the standard rosters.": "Необязательно: пропустите, чтобы использовать стандартные составы.",
+  "Ready to start": "Готово к старту",
 }
 
 export default catalog

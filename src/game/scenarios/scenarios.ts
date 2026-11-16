@@ -266,7 +266,6 @@ function assertSides(factions: PlayerId[], sides: [PlayerId, PlayerId]) {
 }
 
 const ruin = (id: string, name: string, poly: Vec[]): Terrain => ({ id, name, kind: 'ruin', poly, obscuring: true })
-const crater = (id: string, poly: Vec[]): Terrain => ({ id, name: tr('Crater'), kind: 'crater', poly, obscuring: false })
 const woods = (id: string, poly: Vec[]): Terrain => ({ id, name: tr('Woods'), kind: 'woods', poly, obscuring: true })
 const barricade = (id: string, poly: Vec[]): Terrain => ({ id, name: tr('Barricade'), kind: 'barricade', poly, obscuring: true })
 const container = (id: string, poly: Vec[]): Terrain => ({ id, name: tr('Container'), kind: 'container', poly, obscuring: true })
@@ -279,7 +278,7 @@ export const SCENARIOS: Scenario[] = [
     id: 'training-outpost',
     name: tr('Training skirmish at the outpost'),
     description:
-      tr('A 30″×22″ field (like the Introductory Set mat). The Space Marines deploy at the left edge, the Orks at the right. Three objective markers, hut-ruins block line of sight, craters give cover. The open field favours shooters.'),
+      tr('A 30″×22″ field (like the Introductory Set mat). The Space Marines deploy at the left edge, the Orks at the right. Three objective markers, hut-ruins block line of sight. The open field favours shooters.'),
     victory: VICTORY,
     deployment: { west: rect(0, 0, 6, 22), east: rect(24, 0, 6, 22) },
     factions: ['marines', 'orks'],
@@ -289,8 +288,6 @@ export const SCENARIOS: Scenario[] = [
         [
           ruin('t1', tr('Hut ruin'), rect(11, 3.5, 4, 3)),
           ruin('t2', tr('Hut ruin'), rect(15, 15.5, 4, 3)),
-          crater('t3', rect(5.5, 12, 3, 3)),
-          crater('t4', rect(21.5, 7, 3, 3)),
           ruin('t5', tr('Wall debris'), rect(14, 9.5, 2, 0.8)),
         ],
         [{ x: 15, y: 11 }, { x: 8, y: 6 }, { x: 22, y: 16 }],
@@ -314,8 +311,6 @@ export const SCENARIOS: Scenario[] = [
           ruin('t3', tr('Ruins'), rect(17.5, 2, 2.5, 6)),
           ruin('t4', tr('Ruins'), rect(17.5, 14, 2.5, 6)),
           ruin('t5', tr('Hut ruin'), rect(13.5, 8.5, 3, 5)),
-          crater('t6', rect(6, 9.5, 2.5, 3)),
-          crater('t7', rect(21.5, 9.5, 2.5, 3)),
         ],
         [{ x: 15, y: 4 }, { x: 15, y: 18 }, { x: 15, y: 11 }],
         sides,
@@ -327,7 +322,7 @@ export const SCENARIOS: Scenario[] = [
     id: 'combat-patrol',
     name: tr('Combat Patrol (big battle)'),
     description:
-      tr('A 44″×30″ field and bigger armies; all six armies (Space Marines, Orks, Tyranids, Necrons, Aeldari, Adeptus Mechanicus) are available in any pair — see the army selection screen for the roster. Varied terrain: ruins and woods (vehicles cannot pass), containers (you cannot stand inside), barricades, craters. A longer and tactically richer game.'),
+      tr('A 44″×30″ field and bigger armies; all six armies (Space Marines, Orks, Tyranids, Necrons, Aeldari, Adeptus Mechanicus) are available in any pair — see the army selection screen for the roster. Varied terrain: ruins and woods (vehicles cannot pass), containers (you cannot stand inside), barricades. A longer and tactically richer game.'),
     victory: VICTORY,
     deployment: { west: rect(0, 0, 10, 30), east: rect(34, 0, 10, 30) },
     factions: ['marines', 'orks', 'tyranids', 'necrons', 'aeldari', 'adeptus_mechanicus'],
@@ -350,8 +345,6 @@ export const SCENARIOS: Scenario[] = [
           container('t6', rect(20.5, 19.5, 3, 1.5)),
           barricade('t7', rect(11, 9, 0.6, 4)),
           barricade('t8', rect(32.4, 17, 0.6, 4)),
-          crater('t9', rect(16.5, 24, 3, 3)),
-          crater('t10', rect(24.5, 3, 3, 3)),
         ],
         [{ x: 22, y: 15 }, { x: 14, y: 9 }, { x: 30, y: 21 }],
         units(44, sides, (f) => (armies[f] ? () => [] : PATROL_ROSTERS[f])),
