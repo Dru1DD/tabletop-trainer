@@ -3438,6 +3438,8 @@ const catalog: Catalog = {
   "🧬 Hyper-adaptation for the whole battle": "🧬 Hiperadaptacja na całą bitwę",
   "🧭 Turn plan": "🧭 Plan tury",
   "🧭 Turn plan (the opponent is moving now)": "🧭 Plan tury (teraz rusza się przeciwnik)",
+  "Optional: skip it to use the standard rosters.": "Opcjonalnie: pomiń, aby użyć standardowych składów.",
+  "Ready to start": "Gotowe do startu",
 }
 
 export default catalog
