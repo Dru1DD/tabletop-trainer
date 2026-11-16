@@ -9,7 +9,6 @@ import { tr } from '../i18n/index'
 export const TERRAIN_PRESETS = {
   ruin: { name: tr('Ruins'), kind: 'ruin', w: 4, h: 3 },
   wall: { name: tr('Wall debris'), kind: 'ruin', w: 3, h: 0.8 },
-  crater: { name: tr('Crater'), kind: 'crater', w: 3, h: 3 },
   woods: { name: tr('Woods'), kind: 'woods', w: 4, h: 4 },
   barricade: { name: tr('Barricade'), kind: 'barricade', w: 4, h: 0.6 },
   container: { name: tr('Container'), kind: 'container', w: 3, h: 1.5 },
@@ -27,6 +26,15 @@ export function boxOf(t: Terrain): Box {
   const xs = t.poly.map((p) => p.x), ys = t.poly.map((p) => p.y)
   const x = Math.min(...xs), y = Math.min(...ys)
   return { x, y, w: Math.max(...xs) - x, h: Math.max(...ys) - y }
+}
+
+/** Where the trees of a wood stand (inches from the piece's corner): a staggered grid, shared by the flat and 2.5D views. */
+export function treeSpots(b: Box): { x: number; y: number }[] {
+  const cols = Math.max(1, Math.floor(b.w / 1.2)), rows = Math.max(1, Math.floor(b.h / 1.2))
+  return Array.from({ length: cols * rows }, (_, i) => {
+    const r = Math.floor(i / cols)
+    return { x: ((i % cols) + 0.5) * (b.w / cols) + (r % 2 ? 0.25 : -0.25), y: (r + 0.5) * (b.h / rows) }
+  })
 }
 
 /** Snap to ½″, clamp size and keep the piece on the board. */
@@ -52,5 +60,5 @@ export function parseLayout(v: unknown): Terrain[] | null {
   const ok = v.every((t) =>
     t && typeof t.id === 'string' && typeof t.name === 'string' && Object.hasOwn(TERRAIN_CATEGORY, t.kind) && typeof t.obscuring === 'boolean' &&
     Array.isArray(t.poly) && t.poly.length >= 3 && t.poly.every((p: { x: unknown; y: unknown }) => Number.isFinite(p?.x) && Number.isFinite(p?.y)))
-  return ok ? (v as Terrain[]) : null
+  return ok ? (v as Terrain[]).filter((t) => t.kind !== 'crater') : null // craters are gone from the game; old saves drop them
 }
